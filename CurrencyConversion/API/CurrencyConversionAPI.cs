@@ -17,8 +17,8 @@ namespace CurrencyConversion.API
         {
             return m_webClient.DownloadString(strURL);
         }
-        
-        public static double Convert(CurrencyConversionContext cccCurrencyConversionContext)
+
+        public static double GetExchangeRate(CurrencyConversionContext cccCurrencyConversionContext)
         {
             // Constant definition
             const string EXCHANGE_RATE_HEADER = "rates";
@@ -26,7 +26,9 @@ namespace CurrencyConversion.API
             // Code Section
             // Build convertion URL
             string strConversionStringURL =
-                $"https://api.exchangeratesapi.io/latest?symbols={cccCurrencyConversionContext.DestinationCurrency}&base={cccCurrencyConversionContext.SourceCurrency}";
+                $"https://api.exchangeratesapi.io/latest?"                      + 
+                $"symbols={cccCurrencyConversionContext.DestinationCurrency}&"  + 
+                $"base={cccCurrencyConversionContext.SourceCurrency}";
 
             // Get API response
             string strResponse = CurrencyConversionAPI.DispatchGetAPI(strConversionStringURL);
@@ -36,6 +38,16 @@ namespace CurrencyConversion.API
 
             // Get exchnange rate
             double dExchangeRate = (float)(jsonResponse[EXCHANGE_RATE_HEADER][$"{cccCurrencyConversionContext.DestinationCurrency}"]);
+
+            // Return exchange response
+            return dExchangeRate;
+        }
+
+        public static double Convert(CurrencyConversionContext cccCurrencyConversionContext)
+        {
+            // Code Section
+            // Get exchnange rate
+            double dExchangeRate = CurrencyConversionAPI.GetExchangeRate(cccCurrencyConversionContext);
 
             // Return exchange response
             return cccCurrencyConversionContext.Amount * dExchangeRate;
