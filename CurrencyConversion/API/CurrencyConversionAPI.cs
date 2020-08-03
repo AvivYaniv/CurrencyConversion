@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CurrencyConversion.API
 {
-    class CurrencyConversionAPI
+    public class CurrencyConversionAPI
     {
         // Members Decleration
         protected static WebClient m_webClient = new WebClient();

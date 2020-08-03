@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CurrencyConversion.Context
 {
-    class CurrencyConversionContext
+    public class CurrencyConversionContext
     {
         // Members Section
         string  m_strSourceCurrency;

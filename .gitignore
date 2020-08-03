@@ -1,3 +1,5 @@
 .vs/
 CurrencyConversion/bin/
 CurrencyConversion/obj/
+CurrencyConversionUnitTest/bin/
+CurrencyConversionUnitTest/obj/
