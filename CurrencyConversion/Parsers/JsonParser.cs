@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CurrencyConversion.Parsers
 {
-    class JsonParser
+    public class JsonParser
     {
         public static dynamic Parse(string strJSON)
         {
