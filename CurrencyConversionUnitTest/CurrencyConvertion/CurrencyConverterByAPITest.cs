@@ -18,7 +18,6 @@ namespace CurrencyConversionUnitTest.CurrencyConvertion
         {
             // Code Section
             // Mock default exchange rate
-            // Mock<CurrencyConversionContext> mock_cccCurrencyConversionContext = new Mock<CurrencyConversionContext>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<double>());
             Mock<CurrencyConverterByAPI> mock_ccCurrencyConverterByAPI = new Mock<CurrencyConverterByAPI>();
             mock_ccCurrencyConverterByAPI.Setup(x => x.GetExchangeRate(It.IsAny<CurrencyConversionContext>())).Returns(TestConstants.DEFAULT_EXCHANGE_RATE);
 
