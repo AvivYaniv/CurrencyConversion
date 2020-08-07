@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CurrencyConversion.InputHandlers
+namespace CurrencyConversionProgram.InputHandlers
 {
     class FileHandler
     {

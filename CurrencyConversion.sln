@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConversion", "CurrencyConversion\CurrencyConversion.csproj", "{473385B7-70EB-4B94-9DF4-33CA3949F868}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConversionProgram", "CurrencyConversion\CurrencyConversionProgram.csproj", "{473385B7-70EB-4B94-9DF4-33CA3949F868}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConversionUnitTest", "CurrencyConversionUnitTest\CurrencyConversionUnitTest.csproj", "{016F4D43-5D93-4A10-85CD-C1DD76A3186B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConversionUnitTest", "CurrencyConversionUnitTest\CurrencyConversionUnitTest.csproj", "{016F4D43-5D93-4A10-85CD-C1DD76A3186B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

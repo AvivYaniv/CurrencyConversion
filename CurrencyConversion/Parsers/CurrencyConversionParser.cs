@@ -1,13 +1,13 @@
-﻿using CurrencyConversion.Context;
+﻿using CurrencyConversionProgram.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CurrencyConversion.Parsers
+namespace CurrencyConversionProgram.Parsers
 {
-    class CurrencyConversionParser
+    class CurrencyConversionParser : ICurrencyConversionParser
     {
-        public static ICollection<CurrencyConversionContext> Parse(string[] arrCurrencyConversionFormat)
+        public ICollection<CurrencyConversionContext> Parse(string[] arrCurrencyConversionFormat)
         {
             // Variable Definition
             string  strSourceCurrency                                          = arrCurrencyConversionFormat[0];

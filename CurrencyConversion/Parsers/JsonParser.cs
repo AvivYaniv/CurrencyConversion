@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CurrencyConversion.Parsers
+namespace CurrencyConversionProgram.Parsers
 {
     public class JsonParser
     {

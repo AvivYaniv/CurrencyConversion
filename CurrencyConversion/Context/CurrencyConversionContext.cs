@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CurrencyConversion.Context
+namespace CurrencyConversionProgram.Context
 {
     public class CurrencyConversionContext
     {

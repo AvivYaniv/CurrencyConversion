@@ -1,24 +1,24 @@
-﻿using CurrencyConversion.Context;
-using CurrencyConversion.Parsers;
+﻿using CurrencyConversionProgram.Context;
+using CurrencyConversionProgram.Parsers;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace CurrencyConversion.API
+namespace CurrencyConversionProgram.API
 {
-    public class CurrencyConversionAPI
+    public class ExchangeRateFetcherByAPI : IExchangeRateFetcher
     {
         // Members Decleration
         protected static WebClient m_webClient = new WebClient();
 
-        protected static string DispatchGetAPI(string strURL)
+        protected string DispatchGetAPI(string strURL)
         {
             return m_webClient.DownloadString(strURL);
         }
 
-        public static double GetExchangeRate(CurrencyConversionContext cccCurrencyConversionContext)
+        public double GetExchangeRate(CurrencyConversionContext cccCurrencyConversionContext)
         {
             // Constant definition
             const string EXCHANGE_RATE_HEADER = "rates";
@@ -31,7 +31,7 @@ namespace CurrencyConversion.API
                 $"base={cccCurrencyConversionContext.SourceCurrency}";
 
             // Get API response
-            string strResponse = CurrencyConversionAPI.DispatchGetAPI(strConversionStringURL);
+            string strResponse = this.DispatchGetAPI(strConversionStringURL);
 
             // Convert API response to object
             dynamic jsonResponse = JsonParser.Parse(strResponse);
@@ -41,16 +41,6 @@ namespace CurrencyConversion.API
 
             // Return exchange response
             return dExchangeRate;
-        }
-
-        public static double Convert(CurrencyConversionContext cccCurrencyConversionContext)
-        {
-            // Code Section
-            // Get exchnange rate
-            double dExchangeRate = CurrencyConversionAPI.GetExchangeRate(cccCurrencyConversionContext);
-
-            // Return exchange response
-            return cccCurrencyConversionContext.Amount * dExchangeRate;
-        }
+        }        
     }
 }
