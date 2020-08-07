@@ -11,7 +11,7 @@ namespace CurrencyConversionUnitTest.CurrencyConvertion
     [TestClass]
     public class CurrencyConverterByAPITest
     {
-        #region API Logic Tests Section
+        #region Convertion Tests Section
 
         [TestMethod]
         public void TestConvertion()
