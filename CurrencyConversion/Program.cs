@@ -4,6 +4,8 @@ using CurrencyConversionProgram.Parsers;
 using CurrencyConversionProgram.CurrencyConversion;
 using System;
 using System.Collections.Generic;
+using Autofac;
+using Autofac.Core;
 
 namespace CurrencyConversionProgram
 {
@@ -11,9 +13,19 @@ namespace CurrencyConversionProgram
     {
         static void Main(string[] args)
         {
-            // Varaible Section
-            ICurrencyConvertion         ccCurrencyConverter         = new CurrencyConverterByAPI();
-            ICurrencyConversionParser   ccpCurrencyConversionParser = new CurrencyConversionParser();
+            // Container Building
+            ContainerBuilder                cbContainerBuilder          = new ContainerBuilder();
+            
+            // Registering Types
+            cbContainerBuilder.RegisterType<CurrencyConverterByAPI>().As<ICurrencyConvertion>();
+            cbContainerBuilder.RegisterType<CurrencyConversionParser>().As<ICurrencyConversionParser>();
+
+            // Creating Container
+            IContainer cContainer                                       = cbContainerBuilder.Build();
+
+            // Depandancy Injection
+            ICurrencyConvertion             ccCurrencyConverter         = cContainer.Resolve<ICurrencyConvertion>();      
+            ICurrencyConversionParser       ccpCurrencyConversionParser = cContainer.Resolve<ICurrencyConversionParser>();
 
             // Code Section
             // Get currency file path
@@ -24,12 +36,12 @@ namespace CurrencyConversionProgram
             string[] arrCurrencyFileContent = FileHandler.ReadFile(strCurrencyFilePath);
             
             // Parse currency format to contexts
-            ICollection<CurrencyConversionContext> clcCurrencyConversionContext = ccpCurrencyConversionParser.Parse(arrCurrencyFileContent);
+            ICollection<CurrencyConversionContext> clcCurrencyConversionContextList = ccpCurrencyConversionParser.Parse(arrCurrencyFileContent);
 
             // Converting amounts 
-            foreach (CurrencyConversionContext cccCurrencyConversionContext in clcCurrencyConversionContext)
+            foreach (CurrencyConversionContext cccCurrencyConversionContextElement in clcCurrencyConversionContextList)
             {
-                double dResult = ccCurrencyConverter.Convert(cccCurrencyConversionContext);
+                double dResult = ccCurrencyConverter.Convert(cccCurrencyConversionContextElement);
                 Console.WriteLine(dResult);
             }
         }
