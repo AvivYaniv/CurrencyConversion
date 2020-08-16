@@ -5,20 +5,20 @@ using CurrencyConversionProgram.CurrencyConversion;
 using System;
 using System.Collections.Generic;
 using Autofac;
-using Autofac.Core;
 
 namespace CurrencyConversionProgram
 {
     class Program
     {
+        static readonly string DEFAULT_FILE_PATH = "convert.txt";
+
         static void Main(string[] args)
         {
             // Container Building
             ContainerBuilder                cbContainerBuilder          = new ContainerBuilder();
-            
-            // Registering Types
-            cbContainerBuilder.RegisterType<CurrencyConverterByAPI>().As<ICurrencyConvertion>();
-            cbContainerBuilder.RegisterType<CurrencyConversionParser>().As<ICurrencyConversionParser>();
+
+            // Loading Registered Types
+            cbContainerBuilder.RegisterModule<ProgramModule>();
 
             // Creating Container
             IContainer cContainer                                       = cbContainerBuilder.Build();
@@ -31,6 +31,9 @@ namespace CurrencyConversionProgram
             // Get currency file path
             Console.WriteLine(Messages.ENTER_CURRENCY_FILE_PATH_MESSAGE);
             string strCurrencyFilePath = Console.ReadLine();
+
+            // Resolve default currency file path
+            strCurrencyFilePath = (string.Empty != strCurrencyFilePath) ? strCurrencyFilePath : DEFAULT_FILE_PATH;
 
             // Read file
             string[] arrCurrencyFileContent = FileHandler.ReadFile(strCurrencyFilePath);
