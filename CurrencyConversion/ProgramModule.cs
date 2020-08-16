@@ -7,16 +7,23 @@ using CurrencyConversionProgram.Context;
 using CurrencyConversionProgram.InputHandlers;
 using CurrencyConversionProgram.Parsers;
 using CurrencyConversionProgram.CurrencyConversion;
+using System.Reflection;
 
 namespace CurrencyConversionProgram
 {
-    class ProgramModule : Module
+    class ProgramModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder cbContainerBuilder)
         {
-            // Registering Types
-            cbContainerBuilder.RegisterType<CurrencyConverterByAPI>().As<ICurrencyConvertion>();
-            cbContainerBuilder.RegisterType<CurrencyConversionParser>().As<ICurrencyConversionParser>();
+            Assembly asmExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            cbContainerBuilder.RegisterAssemblyTypes(asmExecutingAssembly)
+               .Where(t => t.Name.StartsWith("CurrencyConversionParser"))
+               .As<ICurrencyConversionParser>();
+
+            cbContainerBuilder.RegisterAssemblyTypes(asmExecutingAssembly)
+               .Where(t => t.Name.StartsWith("CurrencyConverter"))
+               .As<ICurrencyConvertion>();
         }
     }
 }
